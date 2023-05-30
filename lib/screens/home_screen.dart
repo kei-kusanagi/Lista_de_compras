@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lista_de_compras/screens/add_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,10 +28,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     if (index == 0) {
-      _addItem();
-      // crear una nueva lista
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddItemScreen()),
+      );
     } else if (index == 1) {
-      // boton para buscar por dia
+      // Implementa la lógica para el botón "Buscar por día"
     }
   }
 
@@ -42,10 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          IconButton(
-            onPressed: _addItem,
-            icon: const Icon(Icons.add),
-          ),
           Expanded(
             child: AnimatedList(
               key: _key,
