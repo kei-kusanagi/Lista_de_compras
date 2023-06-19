@@ -15,6 +15,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  FocusNode productoFocusNode = FocusNode();
   TextEditingController productoController = TextEditingController();
   TextEditingController valorUnitarioController = TextEditingController();
   TextEditingController unidadesController = TextEditingController();
@@ -48,6 +49,7 @@ class _DetailScreenState extends State<DetailScreen> {
       productoController.clear();
       valorUnitarioController.clear();
       unidadesController.clear();
+      productoFocusNode.requestFocus();
     });
   }
 
@@ -115,6 +117,7 @@ class _DetailScreenState extends State<DetailScreen> {
           children: [
             TextField(
               controller: productoController,
+              focusNode: productoFocusNode,
               decoration: const InputDecoration(labelText: 'Producto'),
             ),
             TextField(
@@ -214,7 +217,17 @@ class _DetailScreenState extends State<DetailScreen> {
                       );
                     },
                     child: ListTile(
-                      leading: Row(
+                      leading: Checkbox(
+                        value: objeto['check'],
+                        onChanged: (value) {
+                          setState(() {
+                            objeto['check'] = value;
+                          });
+                        },
+                      ),
+                      title: Text(objeto['producto']),
+                      subtitle: Text('\$ ${objeto['valor']}'),
+                      trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
@@ -227,16 +240,6 @@ class _DetailScreenState extends State<DetailScreen> {
                             onPressed: () => aumentarCantidad(index),
                           ),
                         ],
-                      ),
-                      title: Text(objeto['producto']),
-                      subtitle: Text('Valor: ${objeto['valor']}'),
-                      trailing: Checkbox(
-                        value: objeto['check'],
-                        onChanged: (value) {
-                          setState(() {
-                            objeto['check'] = value;
-                          });
-                        },
                       ),
                     ),
                   );
