@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
               TextField(
                 controller: nombreController,
                 decoration: const InputDecoration(
-                  labelText: 'Nombre',
+                  labelText: 'Nombre de tu lista',
                 ),
               ),
               TextField(
